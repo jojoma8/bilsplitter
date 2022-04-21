@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Tesseract from "tesseract.js";
 
 import ItemBreakdown from "../components/ItemBreakdown";
+import ListNames from "../components/ListNames";
 import OCR from "../components/OCR";
 
 export default function Home() {
   const [data, setData] = useState("loading...");
   const [mainSection, setMainSection] = useState();
+  const [names, setNames] = useState([]);
 
   useEffect(() => {
     handleUpdate();
@@ -60,6 +62,7 @@ export default function Home() {
 
       <main>
         <h1 className="my-5 text-center text-xl">Welcome to Bill Splitter!</h1>
+        <ListNames setNames={setNames} names={names} />
         <OCR setData={setData} />
 
         {typeof mainSection !== "undefined" && (
