@@ -3,8 +3,8 @@ import DialogPrice from "./DialogPrice";
 
 function ItemBreakdown({ data }) {
   return (
-    <div className="flex items-center justify-center">
-      <div className="p-10 max-w-lg bg-red-100 ">
+    <div className="flex items-center justify-center mt-5">
+      <div className="p-10 max-w-lg bg-red-100 rounded-3xl shadow-lg">
         {/* {topSection.map((item) => (
               <div className="flex justify-center">
                 {item.words.map((words) => (

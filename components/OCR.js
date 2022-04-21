@@ -28,14 +28,14 @@ function OCR({ setData }) {
   //   const [ocr, setOcr] = useState("Recognizing...");
 
   return (
-    <div>
+    <div className="flex items-center justify-center ">
       <input
         type="file"
         className="input"
         onChange={(e) => doOCR(e.target.files[0])}
         //   accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf "
       />
-      {progress !== "Loading" && <p>{progress}</p>}
+      {progress !== "Loading" && progress !== 1 && <p>{progress}</p>}
     </div>
   );
 }

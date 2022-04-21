@@ -14,10 +14,10 @@ export default function Home() {
     handleUpdate();
   }, [data]);
 
-  // get position of lines with prices
-  const list = [];
-
   const handleUpdate = () => {
+    // get position of lines with prices
+    const list = [];
+
     if (data !== "loading...") {
       const objLength = data.lines[9].words.length;
       const searchText = data.lines[9].words[objLength - 1].text;
@@ -59,7 +59,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Welcome to Bill Splitter!</h1>
+        <h1 className="my-5 text-center text-xl">Welcome to Bill Splitter!</h1>
         <OCR setData={setData} />
 
         {typeof mainSection !== "undefined" && (
