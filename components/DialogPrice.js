@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-function DialogPrice({ value, array }) {
+function DialogPrice({ value, array, names, index, data }) {
   const [isOpen, setIsOpen] = useState(false);
   // console.log(Object.values(array));
 
@@ -42,26 +42,17 @@ function DialogPrice({ value, array }) {
               ))}
             </Dialog.Title>
             {/* <div className="mt-2 flex flex-col">{value}</div> */}
-            <div className="my-2">who had this?</div>
+            <div className="my-2">Who had this?</div>
             <div className="grid grid-cols-4 gap-4">
-              <div
-                className="p-2 bg-red-600 text-white  rounded-full
-                text-center"
-              >
-                Person1
-              </div>
-              <div
-                className="p-2 bg-yellow-500 text-white  rounded-full
-                text-center"
-              >
-                Person2
-              </div>
-              <div
-                className="p-2 bg-blue-500 text-white  rounded-full
-                text-center"
-              >
-                Person3
-              </div>
+              {names.map((item, index) => (
+                <div
+                  key={index}
+                  className={`p-2 ${item.color} text-white  rounded-full
+                text-center`}
+                >
+                  {item.value}
+                </div>
+              ))}
             </div>
             <button
               onClick={() => setIsOpen(false)}

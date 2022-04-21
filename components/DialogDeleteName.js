@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-function DialogDeleteName({ data, handleDeleteName }) {
+function DialogDeleteName({ data, handleDeleteName, index }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCancel = () => {
@@ -47,7 +47,7 @@ function DialogDeleteName({ data, handleDeleteName }) {
 
             <div className="flex items-center justify-around">
               <button
-                onClick={() => handleDeleteName(name)}
+                onClick={() => handleDeleteName(data.value, index)}
                 className="text-center w-5/12 bg-green-600 border-2 
           border-green-650 rounded-xl text-white font-semibold py-2 
           shadow-lg"

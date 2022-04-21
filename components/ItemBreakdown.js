@@ -1,7 +1,7 @@
 import React from "react";
 import DialogPrice from "./DialogPrice";
 
-function ItemBreakdown({ data }) {
+function ItemBreakdown({ data, names }) {
   return (
     <div className="flex items-center justify-center mt-5">
       <div className="p-10 max-w-lg bg-red-100 rounded-3xl shadow-lg">
@@ -38,6 +38,9 @@ function ItemBreakdown({ data }) {
                       key={index}
                       value={words.text}
                       array={item.words}
+                      names={names}
+                      index={index1}
+                      data={data}
                     />
                   );
                 }

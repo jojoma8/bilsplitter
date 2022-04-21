@@ -49,6 +49,30 @@ export default function Home() {
       console.log(mainSection1);
       // console.log("begin " + list.slice(min));
       // console.log("test " + searchText);
+      handleUpdateNamesList(names, mainSection1);
+    }
+  };
+
+  const handleUpdateNamesList = (newList, mainSection1) => {
+    if (typeof mainSection !== "undefined" && mainSection.length > 0) {
+      const dataCopy = mainSection;
+      dataCopy.map((item, index) => {
+        dataCopy[index]["names"] = newList;
+      });
+      setMainSection(dataCopy);
+      console.log(dataCopy);
+    }
+    if (
+      typeof mainSection === "undefined" &&
+      typeof mainSection1 !== "undefined" &&
+      mainSection1.length > 0
+    ) {
+      const dataCopy = mainSection1;
+      dataCopy.map((item, index) => {
+        dataCopy[index]["names"] = newList;
+      });
+      setMainSection(dataCopy);
+      console.log(dataCopy);
     }
   };
 
@@ -62,11 +86,15 @@ export default function Home() {
 
       <main>
         <h1 className="my-5 text-center text-xl">Welcome to Bill Splitter!</h1>
-        <ListNames setNames={setNames} names={names} />
+        <ListNames
+          setNames={setNames}
+          names={names}
+          handleUpdateNamesList={handleUpdateNamesList}
+        />
         <OCR setData={setData} />
 
         {typeof mainSection !== "undefined" && (
-          <ItemBreakdown data={mainSection} />
+          <ItemBreakdown data={mainSection} names={names} />
         )}
       </main>
     </div>
