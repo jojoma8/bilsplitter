@@ -33,7 +33,7 @@ function OCR({ setData }) {
         type="file"
         className="input"
         onChange={(e) => doOCR(e.target.files[0])}
-        //   accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf"
+        //   accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf "
       />
       {progress !== "Loading" && <p>{progress}</p>}
     </div>
