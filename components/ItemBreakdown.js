@@ -1,7 +1,7 @@
 import React from "react";
 import DialogPrice from "./DialogPrice";
 
-function ItemBreakdown({ data, names }) {
+function ItemBreakdown({ data, setData, names, setNames }) {
   return (
     <div className="flex items-center justify-center mt-5">
       <div className="p-10 max-w-lg bg-red-100 rounded-3xl shadow-lg">
@@ -41,6 +41,8 @@ function ItemBreakdown({ data, names }) {
                       names={names}
                       index={index1}
                       data={data}
+                      setNames={setNames}
+                      setData={setData}
                     />
                   );
                 }

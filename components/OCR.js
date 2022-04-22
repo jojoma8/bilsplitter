@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createWorker } from "tesseract.js";
+import testReceipt from "../public/IMG_1014.jpg";
 
 function OCR({ setData }) {
   const [progress, setProgress] = useState("Loading");
@@ -11,6 +12,7 @@ function OCR({ setData }) {
     },
   });
 
+  // const doOCR = async () => {
   const doOCR = async (file) => {
     await worker.load();
     await worker.loadLanguage("eng");
@@ -21,11 +23,15 @@ function OCR({ setData }) {
     } = await worker.recognize(
       file
       // "https://tesseract.projectnaptha.com/img/eng_bw.png"
+      // testReceipt
     );
     setData(data);
     console.log(data);
   };
   //   const [ocr, setOcr] = useState("Recognizing...");
+  // useEffect(() => {
+  //   doOCR();
+  // }, []);
 
   return (
     <div className="flex items-center justify-center ">
@@ -35,7 +41,9 @@ function OCR({ setData }) {
         onChange={(e) => doOCR(e.target.files[0])}
         //   accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf "
       />
-      {progress !== "Loading" && progress !== 1 && <p>{progress}</p>}
+      {progress !== "Loading" && progress !== 1 && (
+        <p>{Math.round(progress * 100).toFixed(0)}%</p>
+      )}
     </div>
   );
 }

@@ -52,6 +52,8 @@ function ListNames({ names, setNames, handleUpdateNamesList }) {
         break;
     }
     temp.percent = 0;
+    temp.amount = 0;
+    temp.selected = false;
     // console.table(temp);
     setNames((oldArray) => [...oldArray, temp]);
     const newList = names;
