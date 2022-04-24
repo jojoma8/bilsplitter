@@ -9,7 +9,7 @@ import OCR from "../components/OCR";
 
 export default function Home() {
   const [data, setData] = useState("loading...");
-  const [mainSection, setMainSection] = useState();
+  const [mainSection, setMainSection] = useState([]);
   const [names, setNames] = useState([]);
 
   useEffect(() => {
@@ -56,11 +56,19 @@ export default function Home() {
   const handleUpdateNamesList = (newList, mainSection1) => {
     if (typeof mainSection !== "undefined" && mainSection.length > 0) {
       const dataCopy = mainSection;
+      const listSelected = (field) => {
+        return newList.map((x) => x[field]);
+      };
       dataCopy.map((item, index) => {
         dataCopy[index]["names"] = newList;
+        dataCopy[index]["id"] = index;
+        dataCopy[index]["selected"] = listSelected("selected");
+        dataCopy[index]["amount"] = listSelected("amount");
+        dataCopy[index]["percent"] = listSelected("percent");
+        dataCopy[index]["total"] = listSelected("total");
       });
       setMainSection(dataCopy);
-      console.log(dataCopy);
+      // console.log(dataCopy);
     }
     if (
       typeof mainSection === "undefined" &&
@@ -68,11 +76,18 @@ export default function Home() {
       mainSection1.length > 0
     ) {
       const dataCopy = mainSection1;
+      const listSelected = (field) => {
+        return newList.map((x) => x[field]);
+      };
       dataCopy.map((item, index) => {
         dataCopy[index]["names"] = newList;
+        dataCopy[index]["id"] = index;
+        dataCopy[index]["selected"] = listSelected("selected");
+        dataCopy[index]["amount"] = listSelected("amount");
+        dataCopy[index]["percent"] = listSelected("percent");
       });
       setMainSection(dataCopy);
-      console.log(dataCopy);
+      // console.log(dataCopy);
     }
   };
 
@@ -93,10 +108,10 @@ export default function Home() {
         />
         <OCR setData={setData} />
 
-        {typeof mainSection !== "undefined" && (
+        {typeof mainSection !== "undefined" && mainSection.length > 0 && (
           <ItemBreakdown
-            data={mainSection}
-            setData={setMainSection}
+            mainSection={mainSection}
+            setMainSection={setMainSection}
             names={names}
             setNames={setNames}
           />

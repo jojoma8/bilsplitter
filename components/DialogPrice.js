@@ -1,91 +1,90 @@
 import React, { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-function DialogPrice({ value, array, names, setNames, index, data, setData }) {
+function DialogPrice({
+  value,
+  array,
+  names,
+  setNames,
+  index1,
+  mainSection,
+  setMainSection,
+  // countSelected,
+}) {
+  const [localData, setLocalData] = useState(mainSection);
   const [isOpen, setIsOpen] = useState(false);
   const [countSelectedNames, setCountSelectedNames] = useState(0);
-  // console.log(Object.values(array));
+  console.log(mainSection[index1]);
 
-  const description = array.slice(0, array.length - 1);
-
-  const handleUpdate = (nameIndex) => {
-    if (
-      typeof nameIndex !== "undefined" &&
-      typeof data[index].names[nameIndex].selected !== "undefined"
-    ) {
-      const temp = data;
-      // console.log("index " + index + " " + nameIndex);
-      // console.log(temp[index].names[nameIndex].selected);
-      temp[index].names[nameIndex].selected =
-        !temp[index].names[nameIndex].selected;
-
-      // console.log(temp[index].names[nameIndex].selected);
-      // console.log(data);
-      // console.log(temp);
-      // setData(temp)
-      const count = temp[index].names.filter((x) => {
-        return x.selected === true;
-      });
-      // console.log(count.length);
+  const handleCount = () => {
+    if (typeof localData[index1].selected !== "undefined") {
+      const count = localData[index1].selected.filter((x) => x === true);
       setCountSelectedNames(count.length);
-      // console.log("array " + array[array.length - 1].text);
-      temp[index].names.forEach((item) => {
-        if (item.selected === false) {
-          item.percent = 0;
-          item.amount = 0;
-        }
-        if (count.length > 0 && item.selected === true) {
-          item.percent = 100 / count.length;
-          item.amount =
-            (array[array.length - 1].text.replace(/^\D+/g, "") *
-              Math.round(100 / count.length).toFixed(0)) /
-            100;
-        }
-      });
-      // if (temp[index].names[nameIndex].selected === false) {
-      //   temp[index].names[nameIndex].percent = 0;
-      //   temp[index].names[nameIndex].amount = 0;
-      // }
-      // if (count.length > 0 && temp[index].names[nameIndex].selected === true) {
-      //   temp[index].names[nameIndex].percent = 100 / count.length;
-      //   // temp[index].names[nameIndex].amount = 0;
-      // }
-      // console.log(
-      //   temp[index].names[0].value +
-      //     " " +
-      //     // Math.round(100 / count.length).toFixed(0) +
-      //     temp[index].names[0].percent +
-      //     " " +
-      //     temp[index].names[0].amount +
-      //     " " +
-      //     temp[index].names[1].value +
-      //     " " +
-      //     temp[index].names[1].amount +
-      //     " " +
-      //     // Math.round(100 / count.length).toFixed(0)
-      //     temp[index].names[1].percent +
-      //     " " +
-      //     temp[index].names[2].value +
-      //     " " +
-      //     temp[index].names[2].amount +
-      //     " " +
-      //     // Math.round(100 / count.length).toFixed(0)
-      //     temp[index].names[2].percent
-      // );
-      setData(temp);
     }
-    // console.log(count.length);
+  };
+
+  const handleOpenDialog = () => {
+    handleCount();
+    setIsOpen(!isOpen);
+  };
+  const handleCloseDialog = () => {
+    setIsOpen(false);
+  };
+
+  const handleUpdateSelected = (nameIndex) => {
+    const namesTemp = [...mainSection];
+
+    namesTemp[index1].selected[nameIndex] =
+      !namesTemp[index1].selected[nameIndex];
+
+    const count = localData[index1].selected.filter((x) => {
+      return x === true;
+    });
+    setCountSelectedNames(count.length);
+
+    namesTemp[index1].selected.map((item2, index2) => {
+      if (item2 === false) {
+        namesTemp[index1].percent[index2] = 0;
+        namesTemp[index1].amount[index2] = 0;
+      }
+      if (item2 === true) {
+        namesTemp[index1].percent[index2] = 100 / count.length;
+        namesTemp[index1].amount[index2] =
+          (array[array.length - 1].text.replace(/^\D+/g, "") *
+            Math.round(100 / count.length).toFixed(0)) /
+          100;
+      }
+      if (count.length === 0) {
+        namesTemp[index1].percent[index2] = 0;
+        namesTemp[index1].amount[index2] = 0;
+      }
+    });
+
+    setMainSection(namesTemp);
   };
 
   useEffect(() => {
-    // handleUpdate();
+    handleCount();
   }, []);
+  useEffect(() => {
+    setLocalData(mainSection);
+  }, [mainSection]);
 
   return (
     <div>
-      <button className="bg-red-50" onClick={() => setIsOpen(!isOpen)}>
-        {value}
-      </button>
+      <div className="flex items-center justify-around w-40">
+        <button className="bg-red-50" onClick={() => handleOpenDialog()}>
+          {value}
+        </button>
+        {typeof mainSection[index1].names !== "undefined" &&
+          mainSection[index1].names.length > 0 &&
+          mainSection[index1].names.map((item, index2) => (
+            <div className="pl-2" key={index2}>
+              {/* {localData[index1].names[index2].amount} */}
+              {mainSection[index1].amount[index2].toFixed(2)}
+            </div>
+          ))}
+      </div>
       <Dialog
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto bg-gray-100 bg-opacity-80"
@@ -115,47 +114,37 @@ function DialogPrice({ value, array, names, setNames, index, data, setData }) {
                 </div>
               ))}
             </Dialog.Title>
-            {/* <div className="mt-2 flex flex-col">{value}</div> */}
             <div className="my-2">Who had this?</div>
             <div className="grid grid-cols-4 gap-4">
-              {names.map((item, nameIndex) => (
-                <div
-                  key={nameIndex}
-                  className="flex flex-col items-center justify-center"
-                >
-                  <button
+              {typeof mainSection[index1].names !== "undefined" &&
+                mainSection[index1].names &&
+                mainSection[index1].names.map((item, nameIndex) => (
+                  <div
                     key={nameIndex}
-                    className={`px-5 py-3 ${item.color} text-white  rounded-xl
-                text-center`}
-                    onClick={() => handleUpdate(nameIndex)}
+                    className="flex flex-col items-center justify-center"
                   >
-                    {item.value}
-                  </button>
-                  {item.selected === false ? (
-                    <div>
-                      <div className="">0%</div>
-                      <div className="">0</div>
-                    </div>
-                  ) : countSelectedNames > 0 ? (
+                    <button
+                      key={nameIndex}
+                      className={`px-5 py-3 ${item.color} text-white  rounded-xl
+                        text-center`}
+                      onClick={() => handleUpdateSelected(nameIndex)}
+                    >
+                      {item.value}
+                    </button>
+
                     <div>
                       <div className="">
-                        {Math.round(100 / countSelectedNames).toFixed(0)}%
+                        {mainSection[index1].percent[nameIndex].toFixed(0)}%
                       </div>
                       <div className="">
-                        {/* {(array[array.length - 1].text.replace(/^\D+/g, "") *
-                          Math.round(100 / countSelectedNames).toFixed(0)) /
-                          100} */}
-                        {data[index].names[nameIndex].amount.toFixed(2)}
+                        {mainSection[index1].amount[nameIndex].toFixed(2)}
                       </div>
                     </div>
-                  ) : (
-                    <div className="">0%</div>
-                  )}
-                </div>
-              ))}
+                  </div>
+                ))}
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => handleCloseDialog()}
               className="text-center w-5/12 bg-green-600 border-2 
               border-green-650 rounded-xl text-white font-semibold py-2 
               shadow-lg mt-5"
