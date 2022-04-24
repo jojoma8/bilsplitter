@@ -26,13 +26,23 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
         <div className="flex flex-col py-10">
           {mainSection &&
             mainSection.map((item, index1) => (
-              <div key={index1} className={`flex justify-between`}>
-                <div className="flex">
+              <div key={index1} className={`flex justify-between bg-slate-100`}>
+                <div
+                  className="flex flex-nowrap
+                  bg-cyan-100 overflow-hidden "
+                >
                   {/* non-price mainSection */}
+                  {/* {mainSection.length - 1 !== index1 ? (
+                    <div key={index1} className="pr-2">
+                      {item.text}
+                    </div>
+                  ) : (
+                    <div>hello</div>
+                  )} */}
                   {item.words.map((words, index, array) => {
                     if (array.length - 1 !== index) {
                       return (
-                        <div key={index} className="pr-2">
+                        <div key={index} className="pr-2 overflow-x-hidden">
                           {words.text}
                         </div>
                       );

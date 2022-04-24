@@ -4,8 +4,8 @@ import { Dialog } from "@headlessui/react";
 function DialogPrice({
   value,
   array,
-  names,
-  setNames,
+  // names,
+  // setNames,
   index1,
   mainSection,
   setMainSection,
@@ -59,6 +59,12 @@ function DialogPrice({
         namesTemp[index1].amount[index2] = 0;
       }
     });
+    const listOfAmounts = namesTemp.map((a) => a.amount);
+    const result = listOfAmounts.reduce((a, b) => a.map((c, i) => c + b[i]));
+    // console.log(result);
+    namesTemp.map((item) => {
+      item.total = result;
+    });
 
     setMainSection(namesTemp);
   };
@@ -71,19 +77,27 @@ function DialogPrice({
   }, [mainSection]);
 
   return (
-    <div>
-      <div className="flex items-center justify-around w-40">
-        <button className="bg-red-50" onClick={() => handleOpenDialog()}>
+    <div className="">
+      <div className="flex items-center text-center ">
+        <button
+          className="bg-yellow-50 w-16 text-right"
+          onClick={() => handleOpenDialog()}
+        >
           {value}
         </button>
         {typeof mainSection[index1].names !== "undefined" &&
           mainSection[index1].names.length > 0 &&
-          mainSection[index1].names.map((item, index2) => (
-            <div className="pl-2" key={index2}>
-              {/* {localData[index1].names[index2].amount} */}
-              {mainSection[index1].amount[index2].toFixed(2)}
-            </div>
-          ))}
+          mainSection[index1].names.map((item, index2) =>
+            mainSection.length - 1 !== index1 ? (
+              <div className="pl-4 bg-green-50 w-14 " key={index2}>
+                {mainSection[index1].amount[index2].toFixed(2)}
+              </div>
+            ) : (
+              <div className="pl-4 w-14">
+                {mainSection[index1].total[index2].toFixed(2)}
+              </div>
+            )
+          )}
       </div>
       <Dialog
         as="div"
@@ -125,11 +139,11 @@ function DialogPrice({
                   >
                     <button
                       key={nameIndex}
-                      className={`px-5 py-3 ${item.color} text-white  rounded-xl
+                      className={`px-5 py-3 ${mainSection[index1].color[nameIndex]} text-white  rounded-xl
                         text-center`}
                       onClick={() => handleUpdateSelected(nameIndex)}
                     >
-                      {item.value}
+                      {mainSection[index1].names[nameIndex]}
                     </button>
 
                     <div>

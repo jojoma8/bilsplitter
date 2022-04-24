@@ -60,7 +60,8 @@ export default function Home() {
         return newList.map((x) => x[field]);
       };
       dataCopy.map((item, index) => {
-        dataCopy[index]["names"] = newList;
+        dataCopy[index]["names"] = listSelected("value");
+        dataCopy[index]["color"] = listSelected("color");
         dataCopy[index]["id"] = index;
         dataCopy[index]["selected"] = listSelected("selected");
         dataCopy[index]["amount"] = listSelected("amount");
