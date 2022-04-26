@@ -40,7 +40,7 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                 {typeof mainSection[0].names !== "undefined" &&
                   mainSection[0].names &&
                   mainSection[0].names.map((item, index) => (
-                    <div className="bg-green-50 w-14 text-right ">
+                    <div key={index} className="bg-green-50 w-14 text-right ">
                       {item[0]}
                     </div>
                   ))}
