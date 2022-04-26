@@ -110,12 +110,14 @@ export default function Home() {
         <OCR setData={setData} />
 
         {typeof mainSection !== "undefined" && mainSection.length > 0 && (
-          <ItemBreakdown
-            mainSection={mainSection}
-            setMainSection={setMainSection}
-            names={names}
-            setNames={setNames}
-          />
+          <div>
+            <ItemBreakdown
+              mainSection={mainSection}
+              setMainSection={setMainSection}
+              names={names}
+              setNames={setNames}
+            />
+          </div>
         )}
       </main>
     </div>

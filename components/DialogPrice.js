@@ -89,11 +89,11 @@ function DialogPrice({
           mainSection[index1].names.length > 0 &&
           mainSection[index1].names.map((item, index2) =>
             mainSection.length - 1 !== index1 ? (
-              <div className="pl-4 bg-green-50 w-14 " key={index2}>
+              <div className=" bg-green-50 w-14 text-right " key={index2}>
                 {mainSection[index1].amount[index2].toFixed(2)}
               </div>
             ) : (
-              <div className="pl-4 w-14">
+              <div className=" w-14 text-right">
                 {mainSection[index1].total[index2].toFixed(2)}
               </div>
             )
