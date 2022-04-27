@@ -101,7 +101,9 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                 ))}
               </div>
             ))} */}
-        <SummaryTotals mainSection={mainSection} names={names} />
+        {typeof mainSection[0].total !== "undefined" && (
+          <SummaryTotals mainSection={mainSection} names={names} />
+        )}
       </div>
     </div>
   );

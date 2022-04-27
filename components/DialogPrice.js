@@ -51,7 +51,7 @@ function DialogPrice({
         namesTemp[index1].percent[index2] = 100 / count.length;
         namesTemp[index1].amount[index2] =
           (array[array.length - 1].text.replace(/^\D+/g, "") *
-            Math.round(100 / count.length).toFixed(0)) /
+            (100 / count.length)) /
           100;
       }
       if (count.length === 0) {
@@ -85,6 +85,7 @@ function DialogPrice({
         >
           {value}
         </button>
+        {/* price breakdown per person */}
         {typeof mainSection[index1].names !== "undefined" &&
           mainSection[index1].names.length > 0 &&
           mainSection[index1].names.map((item, index2) =>
