@@ -64,7 +64,21 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                   )} */}
 
                   {item.words.map((words, index, array) => {
-                    if (array.length - 1 !== index) {
+                    if (
+                      // if line item ends in a number
+                      item.words[array.length - 1].text.match(
+                        /[0-9]+[.,][0-9]{2}/g
+                      )
+                    ) {
+                      if (array.length - 1 !== index) {
+                        return (
+                          <div key={index} className="pr-1 overflow-x-hidden">
+                            {words.text}
+                          </div>
+                        );
+                      }
+                    } else {
+                      // if line item does not end with a number
                       return (
                         <div key={index} className="pr-1 overflow-x-hidden">
                           {words.text}
@@ -75,20 +89,27 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                 </div>
                 {/* price mainSection */}
                 {item.words.map((words, index, array) => {
-                  if (array.length - 1 === index) {
-                    return (
-                      <DialogPrice
-                        key={index}
-                        value={words.text}
-                        // array={item.words}
-                        array={array}
-                        names={names}
-                        index1={index1}
-                        mainSection={mainSection}
-                        setNames={setNames}
-                        setMainSection={setMainSection}
-                      />
-                    );
+                  if (
+                    // if line item ends in a number
+                    item.words[array.length - 1].text.match(
+                      /[0-9]+[.,][0-9]{2}/g
+                    )
+                  ) {
+                    if (array.length - 1 === index) {
+                      return (
+                        <DialogPrice
+                          key={index}
+                          value={words.text}
+                          // array={item.words}
+                          array={array}
+                          names={names}
+                          index1={index1}
+                          mainSection={mainSection}
+                          setNames={setNames}
+                          setMainSection={setMainSection}
+                        />
+                      );
+                    }
                   }
                 })}
               </div>

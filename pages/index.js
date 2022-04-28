@@ -21,8 +21,8 @@ export default function Home() {
     const list = [];
 
     if (data !== "loading...") {
-      const objLength = data.lines[9].words.length;
-      const searchText = data.lines[9].words[objLength - 1].text;
+      // const objLength = data.lines[9].words.length;
+      // const searchText = data.lines[9].words[objLength - 1].text;
       data.lines.forEach((element, index) => {
         const objLength = element.words.length;
         // console.log("length: " + objLength);
@@ -36,14 +36,14 @@ export default function Home() {
       const max = Math.max(...list);
       // console.log("min " + min);
       // console.log("max " + max);
-      data.lines.forEach((element, index) => {
-        const objLength = element.words.length;
-        // if (index < min) {
-        //   console.log(element.words[objLength - 1].text);
-        // }
-      });
+      // data.lines.forEach((element, index) => {
+      // const objLength = element.words.length;
+      // if (index < min) {
+      //   console.log(element.words[objLength - 1].text);
+      // }
+      // });
       const topSection = data.lines.slice(0, min);
-      const mainSection1 = data.lines.slice(9, max + 1);
+      const mainSection1 = data.lines.slice(min, max + 1);
       setMainSection(mainSection1);
       const bottomSection = data.lines.slice(max + 1);
       console.log(mainSection1);
