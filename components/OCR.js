@@ -34,7 +34,7 @@ function OCR({ setData }) {
   // }, []);
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center mx-10">
       <input
         type="file"
         className="input"

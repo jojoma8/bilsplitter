@@ -71,7 +71,7 @@ function ListNames({ names, setNames, handleUpdateNamesList }) {
   };
   //   console.log("test " + names[0].value);
   return (
-    <div className="flex flex-col items-center justify-center pb-5">
+    <div className="flex flex-col items-center justify-center pb-5 mt-2">
       {/* {names.length === 0 && (
         <button onClick={() => handleAddName("Jojo")}>Add Name</button>
       )} */}

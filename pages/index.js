@@ -104,15 +104,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="my-5 text-center text-xl">Welcome to Bill Splitter!</h1>
+      <main className="flex flex-col">
+        <h1 className="my-5 text-center text-xl ">Welcome to Bill Splitter!</h1>
+
+        <OCR setData={setData} />
         <ListNames
           setNames={setNames}
           names={names}
           handleUpdateNamesList={handleUpdateNamesList}
         />
-        <OCR setData={setData} />
-
         {typeof mainSection !== "undefined" && mainSection.length > 0 && (
           <div>
             <ItemBreakdown

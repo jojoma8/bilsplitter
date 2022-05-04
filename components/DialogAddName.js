@@ -23,7 +23,10 @@ function DialogAddName({ handleAddName }) {
 
   return (
     <div>
-      <button className="" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className="bg-lime-500 text-white rounded-full px-4 py-1 font-bold mt-1"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         Add Name
       </button>
       <Dialog

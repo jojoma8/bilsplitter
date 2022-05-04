@@ -21,8 +21,8 @@ function ItemBreakdown({
   // console.log(mainSection);
 
   return (
-    <div className="flex items-center justify-center mt-5">
-      <div className="p-10 max-w-lg bg-red-100 rounded-3xl shadow-lg">
+    <div className="flex items-center mt-5 ">
+      <div className="p-5 max-w-lg bg-red-100 rounded-3xl shadow-lg">
         {/* {topSection.map((item) => (
               <div className="flex justify-center">
                 {item.words.map((words) => (
@@ -57,8 +57,8 @@ function ItemBreakdown({
             mainSection.map((item, index1) => (
               <div key={index1} className={`flex justify-between bg-slate-100`}>
                 <div
-                  className="flex flex-nowrap
-                  bg-cyan-100 overflow-hidden "
+                  className="flex w-full overflow-hidden
+                  bg-cyan-100 "
                 >
                   {/* non-price mainSection */}
                   {/* {mainSection.length - 1 !== index1 ? (
