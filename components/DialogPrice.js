@@ -53,7 +53,8 @@ function DialogPrice({
       if (item2 === true) {
         namesTemp[index1].percent[index3] = 100 / count.length;
         namesTemp[index1].amount[index3] =
-          (array[array.length - 1].text.replace(/^\D+/g, "") *
+          // (array[array.length - 1].text.replace(/^\D+/g, "") *
+          (mainSection[index1].itemValue.replace(/^\D+/g, "") *
             (100 / count.length)) /
           100;
       }

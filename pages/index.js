@@ -57,18 +57,6 @@ export default function Home() {
     }
   };
 
-  // const handleUpdateAmount = (index1, index2, value) => {
-  //   if (typeof mainSection !== "undefined") {
-  //     const temp = [...mainSection];
-  //     temp[index1].words[index2].text = value;
-  //     // console.log(index1 + " " + index2);
-  //     // console.log(temp[index1].words[index2].text);
-  //     // console.log(temp);
-  //     // setMainSection(temp);
-  //     console.log(temp);
-  //   }
-  // };
-
   const handleUpdateNamesList = (newList, mainSection1) => {
     if (typeof mainSection !== "undefined" && mainSection.length > 0) {
       const dataCopy = mainSection;

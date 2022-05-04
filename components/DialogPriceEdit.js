@@ -10,13 +10,35 @@ function DialogPriceEdit({
   mainSection,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(array[index2].text);
+  const [value, setValue] = useState(mainSection[index1].itemValue);
 
   const handleUpdate = (e) => {
     setValue(e.target.value);
     // handleUpdateAmount(index1, index2, e.target.value);
     const temp = [...mainSection];
     temp[index1].itemValue = e.target.value;
+
+    // update divided value per person
+    const count = mainSection[index1].selected.filter((x) => {
+      return x === true;
+    });
+    temp[index1].selected.map((item2, index3) => {
+      if (item2 === false) {
+        temp[index1].percent[index3] = 0;
+        temp[index1].amount[index3] = 0;
+      }
+      if (item2 === true) {
+        temp[index1].percent[index3] = 100 / count.length;
+        temp[index1].amount[index3] =
+          // (array[array.length - 1].text.replace(/^\D+/g, "") *
+          (e.target.value.replace(/^\D+/g, "") * (100 / count.length)) / 100;
+      }
+      if (count.length === 0) {
+        temp[index1].percent[index3] = 0;
+        temp[index1].amount[index3] = 0;
+      }
+    });
+
     setMainSection(temp);
     // console.log("main section");
     console.log(temp);
