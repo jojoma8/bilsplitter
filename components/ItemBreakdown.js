@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import DialogPrice from "./DialogPrice";
 import SummaryTotals from "./SummaryTotals";
 
-function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
+function ItemBreakdown({
+  mainSection,
+  setMainSection,
+  names,
+  setNames,
+  // handleUpdateAmount,
+}) {
   // const [countSelectedNames, setCountSelectedNames] = useState(0);
 
   // const countSelectedItems = (index) => {
@@ -41,7 +47,7 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                   mainSection[0].names &&
                   mainSection[0].names.map((item, index) => (
                     <div key={index} className="bg-green-50 w-14 text-right ">
-                      {item[0]}
+                      {item}
                     </div>
                   ))}
               </div>
@@ -88,25 +94,28 @@ function ItemBreakdown({ mainSection, setMainSection, names, setNames }) {
                   })}
                 </div>
                 {/* price mainSection */}
-                {item.words.map((words, index, array) => {
+                {item.words.map((words, index2, array) => {
                   if (
                     // if line item ends in a number
                     item.words[array.length - 1].text.match(
                       /[0-9]+[.,][0-9]{2}/g
                     )
                   ) {
-                    if (array.length - 1 === index) {
+                    if (array.length - 1 === index2) {
                       return (
                         <DialogPrice
-                          key={index}
-                          value={words.text}
+                          key={index2}
+                          // value={words.text}
+                          value={item.itemValue}
                           // array={item.words}
                           array={array}
                           names={names}
                           index1={index1}
+                          index2={index2}
                           mainSection={mainSection}
                           setNames={setNames}
                           setMainSection={setMainSection}
+                          // handleUpdateAmount={handleUpdateAmount}
                         />
                       );
                     }

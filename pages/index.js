@@ -44,6 +44,10 @@ export default function Home() {
       // });
       const topSection = data.lines.slice(0, min);
       const mainSection1 = data.lines.slice(min, max + 1);
+      mainSection1.map((item, index) => {
+        mainSection1[index]["itemValue"] =
+          mainSection1[index].words[mainSection1[index].words.length - 1].text;
+      });
       setMainSection(mainSection1);
       const bottomSection = data.lines.slice(max + 1);
       console.log(mainSection1);
@@ -52,6 +56,18 @@ export default function Home() {
       handleUpdateNamesList(names, mainSection1);
     }
   };
+
+  // const handleUpdateAmount = (index1, index2, value) => {
+  //   if (typeof mainSection !== "undefined") {
+  //     const temp = [...mainSection];
+  //     temp[index1].words[index2].text = value;
+  //     // console.log(index1 + " " + index2);
+  //     // console.log(temp[index1].words[index2].text);
+  //     // console.log(temp);
+  //     // setMainSection(temp);
+  //     console.log(temp);
+  //   }
+  // };
 
   const handleUpdateNamesList = (newList, mainSection1) => {
     if (typeof mainSection !== "undefined" && mainSection.length > 0) {
@@ -116,6 +132,7 @@ export default function Home() {
               setMainSection={setMainSection}
               names={names}
               setNames={setNames}
+              // handleUpdateAmount={handleUpdateAmount}
             />
           </div>
         )}

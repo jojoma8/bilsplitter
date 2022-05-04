@@ -55,6 +55,7 @@ function ListNames({ names, setNames, handleUpdateNamesList }) {
     temp.amount = 0;
     temp.selected = false;
     temp.total = 0;
+    // temp.itemValue = 0;
     // console.table(temp);
     setNames((oldArray) => [...oldArray, temp]);
     const newList = names;
