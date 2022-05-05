@@ -79,6 +79,7 @@ function ItemBreakdown({
                       if (array.length - 1 !== index) {
                         return (
                           <div key={index} className="pr-1 overflow-x-hidden">
+                            {/* item description */}
                             {words.text}
                           </div>
                         );
@@ -93,7 +94,7 @@ function ItemBreakdown({
                     }
                   })}
                 </div>
-                {/* price mainSection */}
+                {/* price/amount mainSection */}
                 {item.words.map((words, index2, array) => {
                   if (
                     // if line item ends in a number

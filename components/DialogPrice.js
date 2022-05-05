@@ -100,7 +100,10 @@ function DialogPrice({
               </div>
             ) : (
               <div className=" w-14 text-right" key={index3}>
-                {mainSection[index1].total[index3].toFixed(2)}
+                {/* show sub total per person */}
+                {/* {mainSection[index1].total[index3].toFixed(2)} */}
+                {/* show broken down value, same as above */}
+                {mainSection[index1].amount[index3].toFixed(2)}
               </div>
             )
           )}

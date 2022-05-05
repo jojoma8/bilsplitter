@@ -2,7 +2,14 @@ import React from "react";
 import DialogAddName from "./DialogAddName";
 import DialogDeleteName from "./DialogDeleteName";
 
-function ListNames({ names, setNames, handleUpdateNamesList }) {
+function ListNames({
+  names,
+  setNames,
+  handleUpdateNamesList,
+  mainSection,
+  setMainSection,
+  handleRemoveName,
+}) {
   const handleAddName = (name) => {
     // console.log("len " + names.length);
     const temp = {};
@@ -64,10 +71,12 @@ function ListNames({ names, setNames, handleUpdateNamesList }) {
   };
 
   const handleDeleteName = (name, index) => {
+    const newList = names.filter((value, i) => i !== index);
     // let newList = names.filter((item) => item.value !== name);
     setNames((prev) => {
       return prev.filter((value, i) => i !== index);
     });
+    handleRemoveName(newList, index);
   };
   //   console.log("test " + names[0].value);
   return (

@@ -96,6 +96,52 @@ export default function Home() {
     }
   };
 
+  const handleRemoveName = (newList, indexSource) => {
+    const listSelected = (field) => {
+      return newList.map((x) => x[field]);
+    };
+    const dataCopy = mainSection;
+    dataCopy.map((item, index) => {
+      // remove name from list
+      dataCopy[index]["names"] = listSelected("value");
+      // remove slected based on index provided from diaolg
+      dataCopy[index]["selected"] = item.selected.filter(
+        (v, i) => i !== indexSource
+      );
+      // calculate split of cost
+      const count = dataCopy[index].selected.filter((x) => {
+        return x === true;
+      });
+      dataCopy[index].selected.map((item2, index3) => {
+        if (item2 === false) {
+          dataCopy[index].percent[index3] = 0;
+          dataCopy[index].amount[index3] = 0;
+        }
+        if (item2 === true) {
+          dataCopy[index].percent[index3] = 100 / count.length;
+          dataCopy[index].amount[index3] =
+            // (array[array.length - 1].text.replace(/^\D+/g, "") *
+            (mainSection[index].itemValue.replace(/^\D+/g, "") *
+              (100 / count.length)) /
+            100;
+        }
+        if (count.length === 0) {
+          dataCopy[index].percent[index3] = 0;
+          dataCopy[index].amount[index3] = 0;
+        }
+      });
+      const listOfAmounts = dataCopy.map((a) => a.amount);
+      const result = listOfAmounts.reduce((a, b) => a.map((c, i) => c + b[i]));
+      // console.log(result);
+      dataCopy.map((item) => {
+        item.total = result;
+      });
+    });
+    console.log("dataCopy");
+    console.log(dataCopy);
+    setMainSection(dataCopy);
+  };
+
   return (
     <div>
       <Head>
@@ -112,6 +158,9 @@ export default function Home() {
           setNames={setNames}
           names={names}
           handleUpdateNamesList={handleUpdateNamesList}
+          mainSection={mainSection}
+          setMainSection={setMainSection}
+          handleRemoveName={handleRemoveName}
         />
         {typeof mainSection !== "undefined" && mainSection.length > 0 && (
           <div>
