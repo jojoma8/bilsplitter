@@ -95,11 +95,12 @@ function DialogPrice({
           mainSection[index1].names.length > 0 &&
           mainSection[index1].names.map((item, index3) =>
             mainSection.length - 1 !== index1 ? (
-              <div className=" bg-green-50 w-14 text-right " key={index3}>
+              <div className=" bg-green-50 w-12 text-right " key={index3}>
                 {mainSection[index1].amount[index3].toFixed(2)}
               </div>
             ) : (
-              <div className=" w-14 text-right" key={index3}>
+              // last row
+              <div className=" w-12 text-right" key={index3}>
                 {/* show sub total per person */}
                 {/* {mainSection[index1].total[index3].toFixed(2)} */}
                 {/* show broken down value, same as above */}

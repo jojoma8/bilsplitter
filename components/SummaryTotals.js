@@ -21,8 +21,8 @@ function SummaryTotals({ mainSection, names }) {
     <div>
       <div className="flex">
         <div className="font-semibold text-2xl">Summary</div>
-        <button className="pl-2 text-blue-600" onClick={() => setIsOpen(true)}>
-          service charge
+        <button className="pl-20 text-blue-600" onClick={() => setIsOpen(true)}>
+          service charge {serviceCharge}%
         </button>
       </div>
       <div className="mt-2">
